@@ -3,7 +3,6 @@ package pack.java_samu;
 import java.util.ArrayList;
 import java.util.List;
 
-import 
 import org.linkgrammar.LinkGrammar;
 import org.linkgrammar.Linkage;
 
