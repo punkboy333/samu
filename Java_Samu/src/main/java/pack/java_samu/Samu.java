@@ -5,16 +5,14 @@ import pack.java_samu.VisualImagery;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.*;
 
 public class Samu {
 
 	public Samu() {
-		mutex_ = new ReentrantLock();
+		mt = new ReentrantLock();
 		vi = new VisualImagery();
 		nlp = new NLP();
 		caregiver_name_ = new ArrayList<String>();
@@ -59,10 +57,10 @@ public class Samu {
 	}
 
 	public void terminal() {
-		mutex_.lock();
+		mt.lock();
 
 		FamilyCaregiverShell();
-		mutex_.unlock();
+		mt.unlock();
 	}
 
 	public void ThisWasAnOperator(String sentence) {
@@ -84,11 +82,11 @@ public class Samu {
 		return vi.reward();
 	}
 
-	private boolean run_ = true;
-	private Lock mutex_;
-	private NLP nlp;
-	private VisualImagery vi;
-	private int caregiver_idx_ = 0;
-	private List<String> caregiver_name_;
+	public boolean run_ = true;
+	public Lock mt;
+	public NLP nlp;
+	public VisualImagery vi;
+	public int caregiver_idx_ = 0;
+	public List<String> caregiver_name_;
 
 }

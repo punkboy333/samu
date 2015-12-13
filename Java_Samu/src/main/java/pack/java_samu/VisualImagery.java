@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
 public class VisualImagery {
 
 	public VisualImagery() {
-		program = new LinkedList<SPOTriplet>();
+		prog = new LinkedList<SPOTriplet>();
 		ql = new QL();
 	}
 
@@ -29,10 +29,10 @@ public class VisualImagery {
 		if (triplets.size() == 0)
 			return;
 		for (SPOTriplet triplet : triplets) {
-			if (program.size() >= stmt_max)
-				program.poll();
+			if (prog.size() >= stmt_max)
+				prog.poll();
 
-			program.offer(triplet);
+			prog.offer(triplet);
 		}
 		try {
 			BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -44,12 +44,12 @@ public class VisualImagery {
 			graphics.setColor(Color.BLACK);
 			try {
 				graphics.setFont(Font.createFont(Font.TRUETYPE_FONT,
-						new File("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf")).deriveFont(18.0f));
+						new File("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf")).deriveFont(20.0f));
 			} catch (FontFormatException e) {
-				graphics.setFont(new Font("Arial", Font.BOLD, 14));
+				graphics.setFont(new Font("Arial", Font.BOLD, 16));
 			}
 
-			Queue<SPOTriplet> run = program;
+			Queue<SPOTriplet> run = prog;
 
 			String prg = "";
 			stmt_counter = 0;
@@ -98,7 +98,7 @@ public class VisualImagery {
 	}
 
 	private QL ql;
-	Queue<SPOTriplet> program;
+	Queue<SPOTriplet> prog;
 	private int stmt_counter = 0;
 	private static final int stmt_max = 7;
 	private static final int height = 512;
