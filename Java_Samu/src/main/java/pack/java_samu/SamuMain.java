@@ -12,9 +12,9 @@ public class SamuMain {
 		System.out.println("There is NO WARRANTY, to the extent permitted by law.");
 		System.out.println();
 
-		System.out.println("The prenatal development phase has started.");
+		System.out.println("fejlesztési szakasz kezdődött.");
 
-		System.out.println("The prenatal development phase has finished.");
+		System.out.println("fejlesztési szakasz befejeződött.");
 
 		String test[] = { "A rare black squirrel has become a regular visitor to a suburban garden", "This is a car",
 				"This car is mine", "I have a little car", "The sky is blue",
