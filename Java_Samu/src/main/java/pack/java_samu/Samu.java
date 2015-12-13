@@ -40,7 +40,7 @@ public class Samu {
 			      if (line.substring(0, cmd_prefix.length()).equals(cmd_prefix))
 			        {
 			          if ( line == cmd_prefix )
-			            NextCaregiver();
+			            kovCaregiver();
 			        }
 			      else
 			        {
@@ -74,7 +74,7 @@ public class Samu {
 			return "Undefined";
 	}
 
-	public void NextCaregiver() {
+	public void kovCaregiver() {
 		caregiver_idx_ = (caregiver_idx_ + 1) % caregiver_name_.size();
 	}
 

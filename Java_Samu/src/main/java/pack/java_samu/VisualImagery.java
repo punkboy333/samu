@@ -77,7 +77,7 @@ public class VisualImagery {
 
 			System.out.println("QL start... ");
 
-			System.out.println(ql.ThisWasAnOperator(triplets.get(0), prg, img_input));
+			System.out.println(ql.op(triplets.get(0), prg, img_input));
 
 			System.out.println("" + (System.nanoTime() - start) + " ms ");
 
