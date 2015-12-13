@@ -28,21 +28,21 @@ public class QL {
 					weights[i - 1][j] = new double[n_units[i - 1]];
 
 					for (int k = 0; k < n_units[i - 1]; ++k) {
-						weights[i - 1][j][k] = randDoubleGen(random);
+						weights[i - 1][j][k] = rangen(random);
 					}
 				}
 			}
 		}
 
-		public double randDoubleGen(Random random) {
+		public double rangen(Random random) {
 			return -1 + (random.nextDouble() * 2);
 		}
 
-		public double sigmoid(double x) {
+		public double sgd(double x) {
 			return 1.0 / (1.0 + Math.exp(-x));
 		}
 
-		public double ThisWasAnOperator(double image[]) {
+		public double op(double image[]) {
 			units[0] = image;
 
 			for (int i = 1; i < n_layers; ++i) {
@@ -53,12 +53,12 @@ public class QL {
 						units[i][j] += weights[i - 1][j][k] * units[i - 1][k];
 					}
 
-					units[i][j] = sigmoid(units[i][j]);
+					units[i][j] = sgd(units[i][j]);
 
 				}
 			}
 
-			return sigmoid(units[n_layers - 1][0]);
+			return sgd(units[n_layers - 1][0]);
 
 		}
 
@@ -69,7 +69,7 @@ public class QL {
 		}
 
 		public void learning(double image[], double y[]) {
-			ThisWasAnOperator(image);
+			op(image);
 
 			units[0] = image;
 
@@ -82,7 +82,7 @@ public class QL {
 			int i = n_layers - 1;
 
 			for (int j = 0; j < n_units[i]; ++j) {
-				backs[i - 1][j] = sigmoid(units[i][j]) * (1.0 - sigmoid(units[i][j])) * (y[j] - units[i][j]);
+				backs[i - 1][j] = sgd(units[i][j]) * (1.0 - sgd(units[i][j])) * (y[j] - units[i][j]);
 
 				for (int k = 0; k < n_units[i - 1]; ++k) {
 					weights[i - 1][j][k] += (0.2 * backs[i - 1][j] * units[i - 1][k]);
@@ -99,7 +99,7 @@ public class QL {
 						sum += 0.19 * weights[i1][l][j] * backs[i1][l];
 					}
 
-					backs[i1 - 1][j] = sigmoid(units[i1][j]) * (1.0 - sigmoid(units[i1][j])) * sum;
+					backs[i1 - 1][j] = sgd(units[i1][j]) * (1.0 - sgd(units[i1][j])) * sum;
 
 					for (int k = 0; k < n_units[i1 - 1]; ++k) {
 						weights[i1 - 1][j][k] += (0.19 * backs[i1 - 1][j] * units[i1 - 1][k]);
@@ -109,10 +109,10 @@ public class QL {
 
 		}
 
-		private int n_layers;
-		private int n_units[];
-		private double units[][];
-		private double weights[][][];
+		public int n_layers;
+		public int n_units[];
+		public double units[][];
+		public double weights[][][];
 	}
 
 	public QL(SPOTriplet triplet) {
@@ -142,7 +142,7 @@ public class QL {
 		for (Iterator<Entry<SPOTriplet, Perceptron>> it = prcps.entrySet().iterator(); it.hasNext();) {
 
 			Entry<SPOTriplet, Perceptron> thisEntry = (Entry<SPOTriplet, Perceptron>) it.next();
-			q_spap = ((Perceptron) thisEntry.getValue()).ThisWasAnOperator(image);
+			q_spap = ((Perceptron) thisEntry.getValue()).op(image);
 			;
 			if (q_spap > min_q_spap)
 				min_q_spap = q_spap;
@@ -157,7 +157,7 @@ public class QL {
 
 		for (Iterator<Entry<SPOTriplet, Perceptron>> it = prcps.entrySet().iterator(); it.hasNext();) {
 			Entry<SPOTriplet, Perceptron> thisEntry = (Entry<SPOTriplet, Perceptron>) it.next();
-			double q_spap = ((Perceptron) thisEntry.getValue()).ThisWasAnOperator(image);
+			double q_spap = ((Perceptron) thisEntry.getValue()).op(image);
 			double explor = f(q_spap, frqs.get(thisEntry.getKey()).get(prg));
 
 			if (explor >= min_f) {
@@ -169,7 +169,7 @@ public class QL {
 		return ap;
 	}
 
-	SPOTriplet ThisWasAnOperator(SPOTriplet triplet, String prg, double image[]) {
+	SPOTriplet op(SPOTriplet triplet, String prg, double image[]) {
 
 		double reward = 3.0 * triplet.cmp(prev_action) - 1.5;
 
@@ -185,7 +185,7 @@ public class QL {
 			double max_ap_q_sp_ap = max_ap_Q_sp_ap(image);
 
 			for (int z = 0; z < 10; ++z) {
-				double nn_q_s_a = (prcps.get(prev_action)).ThisWasAnOperator(prev_image);
+				double nn_q_s_a = (prcps.get(prev_action)).op(prev_image);
 
 				double q_q_s_a = nn_q_s_a
 						+ alpha(frqs.get(prev_action).get(prev_state)) * (reward + gamma * max_ap_q_sp_ap - nn_q_s_a);

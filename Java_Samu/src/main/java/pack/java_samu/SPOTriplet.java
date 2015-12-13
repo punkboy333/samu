@@ -46,13 +46,7 @@ public class SPOTriplet {
 	}
 
 	public void cut() {
-		/*
-		s = s.replace(".", "");
-		s = s.replace("[", "");
-		p = p.replace(".", "");
-		p = p.replace("[", "");
-		o = o.replace(".", "");
-		o = o.replace("[", "");*/
+
 		try{
 			s = s.substring(0, s.indexOf("."));
 		}catch(Exception e){
@@ -79,7 +73,7 @@ public class SPOTriplet {
 		}
 	}
 	
-	//we are using it as a key
+
 	@Override
     public boolean equals(Object obj){
 		return equal((SPOTriplet) obj);

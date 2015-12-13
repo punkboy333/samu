@@ -25,7 +25,7 @@ public class SamuMain {
 		for (Samu samu = new Samu(); samu.run();) {
 			double sum = 0.0;
 			for (int i = 0; i < 7; ++i) {
-				samu.ThisWasAnOperator(test[i]);
+				samu.viworker(test[i]);
 				sum += samu.reward();
 			}
 			System.out.println("###### " + ++j + "-th iter " + sum);

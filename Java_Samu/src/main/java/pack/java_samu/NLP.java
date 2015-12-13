@@ -13,7 +13,7 @@ public class NLP {
 		LinkGrammar.init();
 	}
 
-	public List<SPOTriplet> sentence2triplets(String s) {
+	public List<SPOTriplet> tirper(String s) {
 		List<SPOTriplet> triplets = new ArrayList<SPOTriplet>();
 
 		LinkGrammar.parse(s);

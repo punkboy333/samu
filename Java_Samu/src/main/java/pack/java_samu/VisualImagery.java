@@ -36,7 +36,7 @@ public class VisualImagery {
 		}
 		try {
 			BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			File outputfile = new File("samu_vi_" + timeInName() + ".png");
+			File outputfile = new File("samu_vi_" + iname() + ".png");
 
 			Graphics graphics = bi.getGraphics();
 			graphics.setColor(Color.WHITE);
@@ -52,7 +52,7 @@ public class VisualImagery {
 			Queue<SPOTriplet> run = prog;
 
 			String prg = "";
-			stmt_counter = 0;
+			counter = 0;
 
 			while (run.peek() != null) {
 				SPOTriplet triplet = run.peek();
@@ -61,7 +61,7 @@ public class VisualImagery {
 				prg += triplet.o;
 
 				graphics.drawString("" + triplet.s + "." + triplet.p + "(" + triplet.o + ")", 5,
-						256 - (++stmt_counter) * 28);
+						256 - (++counter) * 28);
 				run.poll();
 			}
 
@@ -71,7 +71,7 @@ public class VisualImagery {
 
 			for (int i = 0; i < height; ++i)
 				for (int j = 0; j < width; ++j) {
-					img_input[i * 256 + j] = dread(i, j, bi);
+					img_input[i * 256 + j] = xypos(i, j, bi);
 				}
 			long start = System.nanoTime();
 
@@ -86,11 +86,11 @@ public class VisualImagery {
 		}
 	}
 
-	private double dread(int x, int y, BufferedImage im) {
+	private double xypos(int x, int y, BufferedImage im) {
 		return im.getRGB(x, y) / 65535.0;
 	}
 
-	private String timeInName() {
+	private String iname() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS");
 		Date now = new Date();
 		String strDate = sdf.format(now);
@@ -99,7 +99,7 @@ public class VisualImagery {
 
 	private QL ql;
 	Queue<SPOTriplet> prog;
-	private int stmt_counter = 0;
+	private int counter = 0;
 	private static final int stmt_max = 7;
 	private static final int height = 512;
 	private static final int width = 512;

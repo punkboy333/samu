@@ -44,7 +44,7 @@ public class Samu {
 			        }
 			      else
 			        {
-			          ThisWasAnOperator(line);
+			          viworker(line);
 			        }
 
 				  System.out.print(Caregiver() + "@Caregiver> ");
@@ -56,15 +56,15 @@ public class Samu {
 		    run_ = false; 
 	}
 
-	public void terminal() {
+	public void cmd() {
 		mt.lock();
 
 		FamilyCaregiverShell();
 		mt.unlock();
 	}
 
-	public void ThisWasAnOperator(String sentence) {
-		vi.working(nlp.sentence2triplets(sentence));
+	public void viworker(String sentence) {
+		vi.working(nlp.tirper(sentence));
 	}
 
 	public String Caregiver() {
